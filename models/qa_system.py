@@ -239,9 +239,9 @@ if __name__ == "__main__":
     questions = "../data/training/sleep-test.csv"
 
     # models to use
-    ctx_encoder = "facebook/dpr-ctx_encoder-single-nq-base"
-    question_encoder = "facebook/dpr-question_encoder-single-nq-base"
-    reader = "pytorch/reader/"
+    ctx_encoder = "ctx_encoder"
+    question_encoder = "question_encoder"
+    reader = "reader"
 
     # output files
     corpus_embedded = "processed/sleep-corpus_e29_aug"
