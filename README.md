@@ -18,3 +18,24 @@ extractive_readre_train_cgf.ymal -> train files, dev_files, output_dir, checkpoi
 
 
 
+run 
+train_dense_encoder.py
+trani_extracive_reader.py 
+
+save in the desinated outputs folder specify in ymal.file 
+
+convert under model
+convert using 
+using convert_reader.sh reader -may change path
+convert.sh - retrivel - may change path
+
+test 
+retrival qa_system.py -
+reader_test.py - because retrival have no end to end,so right a  
+
+
+
+
+
+
+
