@@ -1,0 +1,99 @@
+[2023-04-16 11:57:37,618][root][INFO] - CFG's local_rank=-1
+[2023-04-16 11:57:37,618][root][INFO] - Env WORLD_SIZE=None
+[2023-04-16 11:57:37,618][root][INFO] - Initialized host www-System-Product-Name as d.rank -1 on device=cuda, n_gpu=1, world size=1
+[2023-04-16 11:57:37,618][root][INFO] - 16-bits training: False 
+[2023-04-16 11:57:37,619][root][INFO] - CFG (after gpu  configuration):
+[2023-04-16 11:57:37,622][root][INFO] - encoder:
+  encoder_model_type: hf_bert
+  pretrained_model_cfg: gdario/biobert_bioasq
+  pretrained_file: null
+  projection_dim: 0
+  sequence_length: 300
+  dropout: 0.1
+  fix_ctx_encoder: false
+  pretrained: true
+train:
+  eval_step: 500
+  batch_size: 3
+  dev_batch_size: 3
+  adam_eps: 1.0e-08
+  adam_betas: (0.9, 0.999)
+  max_grad_norm: 1.0
+  log_batch_step: 100
+  train_rolling_loss_step: 100
+  weight_decay: 0.0
+  learning_rate: 1.0e-05
+  warmup_steps: 0
+  gradient_accumulation_steps: 1
+  num_train_epochs: 30
+model_file: null
+do_lower_case: true
+seed: 42
+train_files: ../../../../data/training/oracle/sleep-train.json
+dev_files: ../../../../data/training/oracle/sleep-dev.json
+passages_per_question: 2
+passages_per_question_predict: 2
+output_dir: null
+max_n_answers: 10
+max_answer_length: 20
+eval_top_docs:
+- 50
+checkpoint_file_name: dpr_extractive_reader
+prediction_results_file: null
+fully_resumable: false
+gold_passages_src: null
+gold_passages_src_dev: null
+num_workers: 1
+local_rank: -1
+global_loss_buf_sz: 150000
+device: cuda
+distributed_world_size: 1
+distributed_port: null
+no_cuda: false
+n_gpu: 1
+fp16: false
+fp16_opt_level: O1
+special_tokens: null
+
+[2023-04-16 11:57:37,622][root][INFO] - ***** Initializing components for training *****
+[2023-04-16 11:57:37,622][root][INFO] - Checkpoint files []
+[2023-04-16 11:57:37,942][dpr.models.hf_models][INFO] - Initializing HF BERT Encoder. cfg_name=gdario/biobert_bioasq
+[2023-04-16 11:57:40,214][root][INFO] - Data files: ['../../../../data/training/oracle/sleep-train.json']
+[2023-04-16 11:57:40,214][root][INFO] - Found preprocessed files. ['../../../../data/training/oracle/sleep-train.0.pkl']
+[2023-04-16 11:57:40,215][root][INFO] - Reading file ../../../../data/training/oracle/sleep-train.0.pkl
+[2023-04-16 11:57:40,286][root][INFO] - Aggregated data size: 4000
+[2023-04-16 11:57:40,286][root][INFO] - Total data size: 4000
+[2023-04-16 11:57:40,286][root][INFO] - Calculating shard positions
+[2023-04-16 11:57:40,286][root][INFO] - samples_per_shard=4000, shard_start_idx=0, shard_end_idx=4000, max_iterations=1333
+[2023-04-16 11:57:40,308][root][INFO] - Total iterations per epoch=1333
+[2023-04-16 11:57:40,308][root][INFO] -  Total updates=39990
+[2023-04-16 11:57:40,308][root][INFO] -   Eval step = 500
+[2023-04-16 11:57:40,308][root][INFO] - ***** Training *****
+[2023-04-16 11:57:40,308][root][INFO] - ***** Epoch 0 *****
+[2023-04-16 11:57:41,239][root][INFO] - Epoch: 0: Step: 1/1333, global_step=1, lr=0.000010
+[2023-04-16 11:57:57,082][root][INFO] - Train batch 100
+[2023-04-16 11:57:57,082][root][INFO] - Avg. loss per last 100 batches: 15.532094
+[2023-04-16 11:57:57,250][root][INFO] - Epoch: 0: Step: 101/1333, global_step=101, lr=0.000010
+[2023-04-16 11:58:13,150][root][INFO] - Train batch 200
+[2023-04-16 11:58:13,150][root][INFO] - Avg. loss per last 100 batches: 7.286496
+[2023-04-16 11:58:13,314][root][INFO] - Epoch: 0: Step: 201/1333, global_step=201, lr=0.000010
+[2023-04-16 11:58:29,204][root][INFO] - Train batch 300
+[2023-04-16 11:58:29,204][root][INFO] - Avg. loss per last 100 batches: 6.654716
+[2023-04-16 11:58:29,367][root][INFO] - Epoch: 0: Step: 301/1333, global_step=301, lr=0.000010
+[2023-04-16 11:58:45,708][root][INFO] - Train batch 400
+[2023-04-16 11:58:45,709][root][INFO] - Avg. loss per last 100 batches: 6.893149
+[2023-04-16 11:58:45,871][root][INFO] - Epoch: 0: Step: 401/1333, global_step=401, lr=0.000010
+[2023-04-16 11:59:02,135][root][INFO] - Train batch 500
+[2023-04-16 11:59:02,136][root][INFO] - Avg. loss per last 100 batches: 5.689895
+[2023-04-16 11:59:02,136][root][INFO] - Validation: Epoch: 0 Step: 500/1333
+[2023-04-16 11:59:02,136][root][INFO] - Validation ...
+[2023-04-16 11:59:02,136][root][INFO] - Data files: ['../../../../data/training/oracle/sleep-dev.json']
+[2023-04-16 11:59:02,137][root][INFO] - Found preprocessed files. ['../../../../data/training/oracle/sleep-dev.0.pkl']
+[2023-04-16 11:59:02,137][root][INFO] - Reading file ../../../../data/training/oracle/sleep-dev.0.pkl
+[2023-04-16 11:59:02,139][root][INFO] - Aggregated data size: 500
+[2023-04-16 11:59:02,139][root][INFO] - Total data size: 500
+[2023-04-16 11:59:02,139][root][INFO] - Calculating shard positions
+[2023-04-16 11:59:02,139][root][INFO] - samples_per_shard=500, shard_start_idx=0, shard_end_idx=500, max_iterations=166
+[2023-04-16 11:59:07,551][root][INFO] - Eval step: 99 
+[2023-04-16 11:59:11,163][root][INFO] - Finished iterating, iteration=167, shard=0
+[2023-04-16 11:59:11,176][root][INFO] - n=50	EM 55.60
