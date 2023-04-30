@@ -31,7 +31,7 @@ convert.sh - retrivel - may change path
 
 test 
 retrival qa_system.py -
-reader_test.py - because retrival have no end to end,so right a  
+reader_test.py - because retrival have no end to end,so write a new test code.
 
 
 
