@@ -1,3 +1,7 @@
+# Using the training checkpoints to convert to pytorch model for testing.
+# the paths for --src needs to be changed accordingly.
+
+
 #--src ../DPR-main/outputs/2023-04-12/11-16-24/dpr_biencoder.$1 \
 #--src ../DPR-main/outputs/2023-04-11/10-17-57/dpr_biencoder.$1 \
 python convert_dpr_original_checkpoint_to_pytorch.py \
