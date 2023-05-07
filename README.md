@@ -158,9 +158,8 @@ For SleepQA3x, Google Pegasus paraphrasing model 'tuner007/pegasus_paraphrase' i
 Comparison of average number of words: SleepQA vs. SleepQA3x 
 
 | Dataset   | Passage  | Question |
-| --------- |----------- | ------- |
+| --------- |----------- | ------ |
 | SleepQA   |    120.5   |  9.9   |
-| ---------|------------ | --------|
 | SleepQA3x |     97.7.  |  9.1   |
 
 
