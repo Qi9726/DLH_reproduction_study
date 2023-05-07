@@ -182,8 +182,11 @@ For SleepQA3x, Google Pegasus paraphrasing model 'tuner007/pegasus_paraphrase' i
 
 #### Reader 
 
-| Dataset   | Passage  | Question |
+| Results   | Model  | EM (oracle) | F1 (oracle)| 
+| --------- |----------- | ------ | ------ |
+| Original Paper |    BERT SQuAD2  |  0.50  | 0.64  | 
+| Original Paper  |     Fine-tuned BioBERT BioASQ |  0.61   | 0.73   | 
 | --------- |----------- | ------ |
-| SleepQA   |    120.5   |  9.9   |
-| SleepQA3x |     97.7.  |  9.1   |
+| Reproduction Study |  Fine-tuned BioBERT BioASQ  |   0.61  | 0.72  |
+
 
