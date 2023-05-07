@@ -39,7 +39,7 @@ reader_test.py - because retrival have no end to end,so write a new test code.
 
 This study is to replicate the paper: Iva Bojic, Qi Chwen Ong, Megh Thakkar, Esha Kamran, Irving Yu Le Shua, Rei Ern Jaime Pang, Jessica Chen, Vaaruni Nayak, Shafiq Joty, Josip Car. SleepQA: A Health Coaching Dataset on Sleep for Extractive Question Answering. Proceedings of Machine Learning for Health (ML4H) 2022 Workshop.
 
-The reproduction codebase is based on SleepQA repo https://github.com/IvaBojic/SleepQA and Dense Passage Retrieval repo https://github.com/facebookresearch/DPR, which was used by the authors of SleepQA to build their question answering (QA) pipeline. 
+The codebase of the reproduction study is built upon SleepQA repo https://github.com/IvaBojic/SleepQA and Dense Passage Retrieval repo https://github.com/facebookresearch/DPR, which was used by the authors of SleepQA to build their question answering (QA) pipeline. 
 
 ## Dependencies 
 List of required packages are listed in requirements.txt
