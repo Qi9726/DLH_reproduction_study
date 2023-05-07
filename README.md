@@ -41,22 +41,23 @@ Citation to the original paper
 
 Link to the original paper’s repo (if applicable)
 
-Dependencies 
+## Dependencies 
+List of required packages are listed in requirements.txt
+
+
+## Data download instruction
+
+
+## Preprocessing code
 to do 
 
-Data download instruction
-
-
-Preprocessing code
+## Training code + command 
 to do 
 
-Training code + command 
+## Evaluation code + command
 to do 
 
-Evaluation code + command
-to do 
-
-Pretrained model 
+## Pretrained model 
 to do
 
 
