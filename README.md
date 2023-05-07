@@ -41,6 +41,9 @@ This study is to replicate the paper: Iva Bojic, Qi Chwen Ong, Megh Thakkar, Esh
 
 The codebase of the reproduction study is built upon SleepQA repo https://github.com/IvaBojic/SleepQA and Dense Passage Retrieval repo https://github.com/facebookresearch/DPR, which was used by the authors of SleepQA to build their question answering (QA) pipeline. 
 
+New scripts created in this study are as below:
+
+
 ## Dependencies 
 List of required packages are listed in requirements.txt
 
