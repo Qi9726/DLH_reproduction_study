@@ -168,13 +168,14 @@ For SleepQA3x, Google Pegasus paraphrasing model 'tuner007/pegasus_paraphrase' i
 
 #### Retriver 
 
-| Dataset   | Passage  | Question | Question |
-| --------- |----------- | ------ |------ |
-| SleepQA   |    120.5   |  9.9   | 9.9   |
-| SleepQA3x |     97.7.  |  9.1   | 9.1   |
-| --------- |----------- | ------ |------ |
-| SleepQA   |    120.5   |  9.9   | 9.9   |
-| SleepQA3x |     97.7.  |  9.1   | 9.1   |
+| Results   | Model  | recall@1 | 
+| --------- |----------- | ------ |
+| Original Paper |    Fine-tuned BERT (SleepQA)  |  0.35  | 
+| Original Paper  |     Fine-tuned PubMedBERT (SleepQA) |  0.42   | 
+| --------- |----------- | ------ |
+| Reproduction Study |  DPR BERT (Natual Question)   |  0.18   |
+| Reproduction Study|  Fine-tuned PubMedBERT (SleepQA)  |  0.35   |
+| Reproduction Study |  Fine-tuned PubMedBERT (SleepQA3x)  |  0.35  | 
 
 
 
