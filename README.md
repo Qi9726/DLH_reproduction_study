@@ -62,10 +62,12 @@ Original SleepQA dataset have been pre-processed in DPR required format by the a
 The new augmented dataset SleepQA3x created in this study is via data_aug/aug.py, which automatically reads the data/training/sleep-train.json. To install dependencies, run command in data_aug/req.txt. The new train dataset is stored as data/training/sleep-train_aug2.json (aug2 means the sleep-train.json was paraphrased twice, and orginal sleep-train.json has been manually incorporated into sleep-train_aug2.json, resulting an augmented train dataset 3 times the original SleepQA).
 
 To train model with this augumented dataset, simply change the DRP setting with DPR-main/conf/datasets/encoder_train_default.yaml: 
-
+'''
 sleep_train:
     _target_: dpr.data.biencoder_data.JsonQADataset
     file: "../../../../data/training/**sleep-train_aug2.json**"
+'''
+
 
 
 ## Training:
