@@ -45,7 +45,7 @@ New files created in this study are as below:
 - SleepQA3x data augumentation: data_aug/aug.py, data_aug/req.txt
 - SleepQA3x train dataset: data/training/sleep-train_aug.json, data/training/sleep-train_aug2.json
 - Reader only evaluation: models/reader_test.py
-- Convert model pytorch checkpoints: models/convert_reader.sh, models/convert.sh
+- Convert model checkpoints to pytorch: models/convert_reader.sh, models/convert.sh
 - Best model checkpoints: models/question_encoder/ folder, models/ctx_encoder/ folder, models/reader/ folder
 
 
