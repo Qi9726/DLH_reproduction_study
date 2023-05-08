@@ -81,17 +81,17 @@ There are two models to train:
 ### Train retriever:
 
 Configurate the .yaml files properly before training. Retriever uses 4 config files in DPR-main: 
-- Main configuration: conf/biencoder_train_cfg.yaml
+- Main configuration: conf/biencoder_train_cfg.yaml <br />
 It has been setup using hf_PubMedBERT as encoder in name of encoder parameter. Set the number of gpu for n_gpu if GPU can be used for training, otherwise, n_gpu should be set to 0, and no_cuda set to True.
 
-- Dataset configuration: conf/datasets/encoder_train_default.yaml
+- Dataset configuration: conf/datasets/encoder_train_default.yaml <br />
 Change the path of dataset accordingly if needed.
 
-- Encoder configuration: conf/encoder folder
+- Encoder configuration: conf/encoder folder <br />
 It stores all the encoder models selected by the authors, including the hf_PubMedBERT.yaml that was used in this study. 
 
-- Train configuration: conf/train/biencoder_default.yaml
-Set the hyperparameter for retreiver here: The batch_size is set to 3 due to memory limits (a single GPU RTX3070 Ti with 8G memory was used in this reproduction study). Larger batch size is recommended (a batch size of 16 was used by the authors) since contrastive learning utilized by DPR can be improved if more negative pairs can be incorporated in a batch.
+- Train configuration: conf/train/biencoder_default.yaml <br />
+Set the hyperparameter for retreiver. The batch_size is set to 3 due to memory limits (a single GPU RTX3070 Ti with 8G memory was used in this reproduction study). Larger batch size is recommended (a batch size of 16 was used by the authors) since contrastive learning utilized by DPR can be improved if more negative pairs can be incorporated in a batch.
     
 To train retriever, run DPR-main/train_dense_encoder.py. No hyperparameters should be required if the configurations are set properly. Note that the outputs will be written into DPR-main/outputs/yyyy-mm-dd where the date is the date that the training is kicked off. 
 
@@ -106,7 +106,7 @@ Similar to retreiver, configuarate the yaml files properly before training reade
   conf/encoder/hf_BioASQ.yaml is the one used in this study, no need to change the configuration
   
 - train configuration: conf/train/extractive_reader_default.yaml 
-   Set the hyperparameter for reader here: The batch_size is set to 3 due to memory limits. A larger batch size may help training accuracy, but unlike retriever training which requires contrastive loss, reader training does not construct in-batch pairs, and each example is independen, thus increasing the batch size to larger size will only help reducing gradient noise, but not introducing additional benefit on top of it. Standard size that generally works well is 16 (used by SleepQA authors) or 32. Can change accordingly if GPU memory is enough.
+Set the hyperparameter for reader here: The batch_size is set to 3 due to memory limits. A larger batch size may help training accuracy, but unlike retriever training which requires contrastive loss, reader training does not construct in-batch pairs, and each example is independen, thus increasing the batch size to larger size will only help reducing gradient noise, but not introducing additional benefit on top of it. Standard size that generally works well is 16 (used by SleepQA authors) or 32. Can change accordingly if GPU memory is enough.
 
 After setting the configs, to train reader, run train_extractive_reader.py. The outputs will be saved in DPR-main/outputs/yyyy-mm-dd. 
 
