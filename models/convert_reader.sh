@@ -6,8 +6,6 @@ python convert_dpr_original_checkpoint_to_pytorch.py \
 --src /media/www/503f1df0-3a4c-49bd-87fc-9c61ffec406b/home/wynnzh/12-09-16/reader/dpr_extractive_reader.$1 \
 --dest reader 
 
-python reader_test.py
-
 
 
 
