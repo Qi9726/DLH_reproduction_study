@@ -90,14 +90,14 @@ convert_reader.sh: one need to change --src to the propoer DPR-main/outputs/ che
 
 To evaluate the trained models, run qa_system.py for both retriever and reader end-to-end evaluation, or reader_test.py for reader evaluation only.  
 
-reader_test.py: it takes the test questions from data/training/sleep-test.csv as input, test data in data/training/oracle/sleep-test.json for ground truth labels, uses the reader model saved in models/reader/ folder after 'model conversion' step, and save predicted answers in models/processed/best_reader_predicted_spans.csv for validation. The program will print out the validation results with EM and F1 score.
+reader_test.py: it takes the test questions from data/training/sleep-test.csv as input, test data in data/training/oracle/sleep-test.json for ground truth labels, uses the reader model saved in models/reader/ folder after 'model conversion' step, and saves predicted answers in models/processed/best_reader_predicted_spans.csv for validation. The program will print out the validation results with EM and F1 score.
 
 
 qa_system.py: to use the converted models, one need to set the ctx encoder: ctx_encoder='pytorch/ctx_encoder', question encoder: 'pytorch/question_encoder', and reader: reader='pytorch/reader'. The other codes do not need to change. 
 
 qa_system.py is the entire question answering pipeline. It first, for each question, retrieves the top 1 passage from the entire corpus, and then use the reader to read on this passage and extract a single span as answer. Specifically, it takes the text_corpus and questions as input, so that the ctx_encoder and question_encoder can encode them and conduct embedding-based search for each question. The produced embedded corpus will be saved in processed/sleep-corpus_e29_aug, the retrieved passages will be saved in processed/sleep_test_e29_aut.csv. Then, the reader saved in pytorch/reader will use both the retrieved passage and the question altogether to extract span answers that are saved in 'processed/pipeline1_label_1.250.aug.csv. 
 
-Note that, qa_system.py will output retrieval-step Top-1 document hits (Recall@1)  for retriever evaluation, and also end-to-end EM and F1 for the entire pipeline. 
+Note that qa_system.py will output retrieval-step Top-1 document hits (as Recall@1) for retriever evaluation, and also end-to-end EM and F1 for the entire pipeline. 
 
 
 ## Models: 
