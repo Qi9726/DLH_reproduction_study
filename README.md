@@ -90,7 +90,7 @@ convert_retriever.sh: Once a model is trained, one need to change the --src to t
 convert_reader.sh: one need to change --src to the propoer DPR-main/outputs/ checkpoint name. The rest of the codes do not need to be changed. 
 
 
-### Model Test
+### Model evaluation
 
 reader_test.py: it takes the test questions from data/training/sleep-test.csv as input, test data in data/training/oracle/sleep-test.json for ground truth labels, uses the reader model saved in models/reader/ folder after 'model conversion' step, and save predicted answers in models/processed/best_reader_predicted_spans.csv for validation. The program will print out the validation results with EM and F1 score.
 
@@ -102,13 +102,12 @@ qa_system.py is the entire question answering pipeline. It first, for each quest
 Note that, qa_system.py will output retrieval-step Top-1 document hits (Recall@1)  for retriever evaluation, and also end-to-end EM and F1 for the entire pipeline. 
 
 
-## models: 
+## Models: 
 
 For reproduction study, the best fine-tuned models obtained from this reproduction study are stored in the models/ folder: models/question_encoder/, models/ctx_encoder/, models/reader/. Those models are git lfs files, which can be directly used for reader_test.py and qa_system.py evaluation scripts. No conversion is needed. 
 
 For SleepQA3x augumentation, this study uses Google Pegasus paraphrasing model 'tuner007/pegasus_paraphrase' in data_aug/aug.py
 
-### Test with a non fine-tuned text encoder
 For baseline retriever, this study used DPR BERT-based retriever trained on Natural Questions (NQ) dataset. <br />
 Set ctx_encoder='facebook/dpr-ctx_encoder-single-nq-base' and question_encoder= ''facebook/dpr-question_encoder-single-nq-base' in qa_system.py
 
