@@ -152,10 +152,9 @@ Those models are git lfs files, which can be directly used for reader_test.py an
 
 For SleepQA3x, Google Pegasus paraphrasing model 'tuner007/pegasus_paraphrase' is set in data_aug/aug.py
 
+## Data Analysis
 
-## Table of results (no need to include additional experiments, but main reproducibility result should be included)
-
-### Dataset Comparison: SleepQA vs. SleepQA3x on average number of word
+Comparison of average number of words in passage and question in train sets of original SleepQA and augumented SleepQA3x.
 
 | Dataset   | Passage  | Question |
 | --------- |----------- | ------ |
@@ -163,10 +162,9 @@ For SleepQA3x, Google Pegasus paraphrasing model 'tuner007/pegasus_paraphrase' i
 | SleepQA3x |     97.7.  |  9.1   |
 
 
+## Reproduction and ablation Results 
 
-### Reproduction Results
-
-#### Retriver 
+### Retriver 
 
 | Results   | Model  | recall@1 | 
 | --------- |----------- | ------ |
@@ -177,6 +175,11 @@ For SleepQA3x, Google Pegasus paraphrasing model 'tuner007/pegasus_paraphrase' i
 | Reproduction Study|  Fine-tuned PubMedBERT (SleepQA)  |  0.35   |
 | Reproduction Study |  Fine-tuned PubMedBERT (SleepQA3x)  |  0.35  | 
 
+This reproduction study chose PubMedBERT to fine tune from scratch as it is the best-performing fine-tuned retriever of the SleepQA paper. Despite using the same DPR framework and codebase as the original paper did, this study’s findings did not yield comparable recall@1 score to that of the original paper (0.35 vs 0.42), although it matches the recall@1 score of the fine-tuned general-domain BERT base model reported in the original paper. A small batch size of 3 was used due to the memory limitations, which may have resulted in failure in replication, as the DPR retriever's in-batch negative technique relies on having enough negative pairs per question. With a batch size of 3, there were only 2 negative pairs per question, compared to 15 for a batch size of 16 used by the authors.
+
+In an attempt to address the limitations of a small batch size and improve retrieval performance, this study utilized the augmented SleepQA3x dataset to fine-tune PubMedBERT. However, the score remained at 0.35. This may be because the training objective of the DPR retriever is to create dense embeddings tha can capture sentence semantics, and paraphrasing that only preserves the original meaning does not add diversity to the semantic information in the dataset, thus not effectively training a better retriever.
+
+To access the value of SleepQA dataset, this study used DPR BERT pretrained on Natural Questions (NQ) dataset as an baseline, which resulted in a recall@1 score of only 0.18. This upholds the importance of utilizing domain-specific datasets for domain-specific tasks, specifically, the value of SleepQA dataset to sleep health domain, despite their significantly smaller size (4,000) when compared to open-domain datasets (almost 60,000).
 
 
 
