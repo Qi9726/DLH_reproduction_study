@@ -117,7 +117,7 @@ Comparison of average number of words in passage and question in train sets of o
 | Dataset   | Passage  | Question |
 | --------- |----------- | ------ |
 | SleepQA   |    120.5   |  9.9   |
-| SleepQA3x |     97.7.  |  9.1   |
+| SleepQA3x |     97.7  |  9.1   |
 
 
 ## Reproduction and Ablation Results 
