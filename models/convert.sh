@@ -24,8 +24,6 @@ cp pytorch/question_encoder/vocab.txt question_encoder/
 
 cp pytorch/ctx_encoder/vocab.txt ctx_encoder/
 
-python qa_system.py
-
 
 
 
