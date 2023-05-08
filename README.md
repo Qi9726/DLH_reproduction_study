@@ -86,7 +86,7 @@ convert_retriever.sh: Once a model is trained, one need to change the --src to t
 convert_reader.sh: one need to change --src to the propoer DPR-main/outputs/ checkpoint name. The rest of the codes do not need to be changed. 
 
 
-## Model evaluation
+## Model Evaluation
 
 To evaluate the trained models, run qa_system.py for both retriever and reader end-to-end evaluation, or reader_test.py for reader evaluation only.  
 
