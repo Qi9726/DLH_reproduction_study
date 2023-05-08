@@ -74,32 +74,24 @@ sleep_train:
 ## Training:
 
 There are two models to train:
-  1. Passage retriever, which retrieves relevant passages from a corpus of sentences for a given question;
-  2. passage reader, which extracts answers from a passage for a given question.
-
-For retriever, pre-train the sentence encoder using hf_PubMedBERT. This BERT-base model is first downloaded from huggingface, and then fine-tuned on SleepQA dataset with Facebook's Dense Passage Retriever tool (DPR-main) folder. 
-
-For passage reader training, the same files are used as passage retrieval training, namely, sleep-train.json, sleep-dev.json.
+  1. Retriever, which retrieves relevant passages from a corpus of sentences for a given question;
+  2. Reader, which extracts answers from a passage for a given question.
 
 
 ### Train retriever:
 
-Configurate the yaml files properly before training. Retriever uses 4 config files in DPR-main: 
-    - Main configuration: conf/biencoder_train_cfg.yaml
-    It has been setup using hf_PubMedBERT as encoder in name of encoder parameter. Set the number of gpu for n_gpu if GPU can be used for training. Otherwise, n_gpu should be set to 0, and no_cuda set to True.
+Configurate the .yaml files properly before training. Retriever uses 4 config files in DPR-main: 
+- Main configuration: conf/biencoder_train_cfg.yaml
+It has been setup using hf_PubMedBERT as encoder in name of encoder parameter. Set the number of gpu for n_gpu if GPU can be used for training, otherwise, n_gpu should be set to 0, and no_cuda set to True.
 
-    - Dataset configuration: conf/datasets/encoder_train_default.yaml. 
-     Change the path of dataset accordingly if needed. To use new augumented dataset, the SleepQA3x, change it to following:
-     
-sleep_train:
-  _target_: dpr.data.biencoder_data.JsonQADataset
-  file: "../../../../data/training/**sleep-train_aug2.json**"
+- Dataset configuration: conf/datasets/encoder_train_default.yaml
+Change the path of dataset accordingly if needed.
 
-- encoder configuration: conf/encoder. 
- It stores all the encoder models selected by the authors, including the hf_PubMedBERT.yaml that used in this study. 
+- Encoder configuration: conf/encoder folder
+It stores all the encoder models selected by the authors, including the hf_PubMedBERT.yaml that was used in this study. 
 
-- train configuration: conf/train/biencoder_default.yaml
- Set the hyperparameter for retreiver here: The batch_size is set to 3 due to memory limits (a single GPU RTX3070 Ti with 8G memory was used in this reproduction study). Larger batch size is recommended (a batch size of 16 was used by the authors) since contrastive learning utilized by DPR can be improved if more negative pairs can be incorporated in a batch.
+- Train configuration: conf/train/biencoder_default.yaml
+Set the hyperparameter for retreiver here: The batch_size is set to 3 due to memory limits (a single GPU RTX3070 Ti with 8G memory was used in this reproduction study). Larger batch size is recommended (a batch size of 16 was used by the authors) since contrastive learning utilized by DPR can be improved if more negative pairs can be incorporated in a batch.
     
 To train retriever, run DPR-main/train_dense_encoder.py. No hyperparameters should be required if the configurations are set properly. Note that the outputs will be written into DPR-main/outputs/yyyy-mm-dd where the date is the date that the training is kicked off. 
 
