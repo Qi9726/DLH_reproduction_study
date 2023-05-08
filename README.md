@@ -51,7 +51,7 @@ New files created in this study are as below:
 
 
 ## Dependencies 
-List of required packages are listed in requirements.txt
+Required packages are listed in requirements.txt
 
 
 ## Data Preprocessing and download
