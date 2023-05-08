@@ -104,7 +104,8 @@ Note that qa_system.py will output retrieval-step Top-1 document hits (as Recall
 
 For reproduction study, the best fine-tuned models obtained from this reproduction study are stored in the models/ folder: models/question_encoder/, models/ctx_encoder/, models/reader/. Those models are git lfs files, which can be directly used for reader_test.py and qa_system.py evaluation scripts. No conversion is needed. 
 
-For SleepQA3x augumentation, this study uses Google Pegasus paraphrasing model 'tuner007/pegasus_paraphrase' in data_aug/aug.py
+For SleepQA3x augumentation, this study uses the [pretrained model] (https://huggingface.co/tuner007/pegasus_paraphrase) based on Google
+s pegasus model in data_aug/aug.py
 
 For baseline retriever, this study used DPR BERT-based retriever trained on Natural Questions (NQ) dataset. <br />
 Set ctx_encoder='facebook/dpr-ctx_encoder-single-nq-base' and question_encoder= ''facebook/dpr-question_encoder-single-nq-base' in qa_system.py
