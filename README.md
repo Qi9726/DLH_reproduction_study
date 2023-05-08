@@ -88,8 +88,6 @@ convert_reader.sh: one need to change --src to the propoer DPR-main/outputs/ che
 
 ## Model evaluation
 
-## Evaluation:
-
 To evaluate the trained models, run qa_system.py for both retriever and reader end-to-end evaluation, or reader_test.py for reader evaluation only.  
 
 reader_test.py: it takes the test questions from data/training/sleep-test.csv as input, test data in data/training/oracle/sleep-test.json for ground truth labels, uses the reader model saved in models/reader/ folder after 'model conversion' step, and save predicted answers in models/processed/best_reader_predicted_spans.csv for validation. The program will print out the validation results with EM and F1 score.
