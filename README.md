@@ -76,11 +76,7 @@ Set the hyperparameter for reader. The batch_size is set to 3 due to memory limi
 After setting the configs, to train reader, run train_extractive_reader.py. The outputs will be saved in DPR-main/outputs/yyyy-mm-dd. 
 
 
-## Evaluation:
-
-To evaluate the trained models, follow two steps: 1. Convert models from DPR models to Pytorch models; 2. Test Model: Run qa_system.py (for both retriever and reader end-to-end evaluation), or reader_test.py for reader evaluation only.  
-
-### Model Conversion: 
+## Model Conversion: 
 The DPR model checkpoints for retriever and reader are saved in DPR-main/outputs/yyyy-mm-dd. One needs to run convert_dpr_original_checkpoint_to_pytorch.py to convert to Pytorch models.
 
 To make this step easy, two scripts were created in this study: convert.sh to convert retriever checkpoints and convert_reader.sh to convert reader checkpoints. 
@@ -90,7 +86,11 @@ convert_retriever.sh: Once a model is trained, one need to change the --src to t
 convert_reader.sh: one need to change --src to the propoer DPR-main/outputs/ checkpoint name. The rest of the codes do not need to be changed. 
 
 
-### Model evaluation
+## Model evaluation
+
+## Evaluation:
+
+To evaluate the trained models, run qa_system.py for both retriever and reader end-to-end evaluation, or reader_test.py for reader evaluation only.  
 
 reader_test.py: it takes the test questions from data/training/sleep-test.csv as input, test data in data/training/oracle/sleep-test.json for ground truth labels, uses the reader model saved in models/reader/ folder after 'model conversion' step, and save predicted answers in models/processed/best_reader_predicted_spans.csv for validation. The program will print out the validation results with EM and F1 score.
 
