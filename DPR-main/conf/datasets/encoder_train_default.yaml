@@ -46,9 +46,11 @@ curatedtrec_dev:
 
 sleep_train:
   _target_: dpr.data.biencoder_data.JsonQADataset
-  file: "../../../../data/training/oracle/sleep-train.json"
-#  file: "../../../../data/training/sleep-train.json"
+  # file: "../../../../data/training/oracle/sleep-train.json"
+  file: "../../../../data/training/sleep-train.json"
 
 sleep_dev:
   _target_: dpr.data.biencoder_data.JsonQADataset
-  file: "../../../../data/training/oracle/sleep-dev.json"
+  #file: "../../../../data/training/oracle/sleep-dev.json"
+  file: "../../../../data/training/sleep-dev.json"
+
