@@ -22,7 +22,7 @@ Required packages are listed in requirements.txt
 
 ## Data Preprocessing and Download
 
-Original SleepQA dataset have been pre-processed in DPR required format by the authors, and stored in data/training within three files: sleep-train.json, sleep-dev.json, sleep-test.csv. 
+The original SleepQA dataset has been pre-processed in DPR required format by the authors, and stored in data/training within three files: sleep-train.json, sleep-dev.json, sleep-test.csv. 
 
 The new augmented dataset SleepQA3x created in this study is via data_aug/aug.py, which automatically reads the data/training/sleep-train.json. To install dependencies, run command in data_aug/req.txt. The new train dataset is stored as data/training/sleep-train_aug2.json (aug2 means the sleep-train.json was paraphrased twice, and orginal sleep-train.json has been manually incorporated into sleep-train_aug2.json, resulting an augmented train dataset 3 times the original SleepQA).
 
