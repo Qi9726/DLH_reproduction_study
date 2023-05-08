@@ -20,7 +20,7 @@ New files created in this study are as below:
 Required packages are listed in requirements.txt
 
 
-## Data Preprocessing and download
+## Data Preprocessing and Download
 
 Original SleepQA dataset have been pre-processed in DPR required format by the authors, and stored in data/training within three files: sleep-train.json, sleep-dev.json, sleep-test.csv. 
 
