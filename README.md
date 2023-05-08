@@ -93,61 +93,60 @@ It stores all the encoder models selected by the authors, including the hf_PubMe
 - Train configuration: conf/train/biencoder_default.yaml <br />
 Set the hyperparameter for retreiver. The batch_size is set to 3 due to memory limits (a single GPU RTX3070 Ti with 8G memory was used in this reproduction study). Larger batch size is recommended (a batch size of 16 was used by the authors) since contrastive learning utilized by DPR can be improved if more negative pairs can be incorporated in a batch.
     
-To train retriever, run DPR-main/train_dense_encoder.py. No hyperparameters should be required if the configurations are set properly. Note that the outputs will be written into DPR-main/outputs/yyyy-mm-dd where the date is the date that the training is kicked off. 
+To train retriever, run DPR-main/train_dense_encoder.py. No hyperparameters should be required if the configurations are set properly. Note that the outputs will be written into DPR-main/outputs/yyyy-mm-dd where the date is the date when the training kicks off. 
 
 ### Train reader:
 
 Similar to retreiver, configuarate the yaml files properly before training reader:
 
-- Main configuration: conf/extractive_reader_train_cfg.yaml
-  It has been set using hf_BioASQ as encoder in name of encoder parameter. Set the number of gpu for n_gpu parameter if GPU can be used for training. Otherwise, n_gpu should be set to 0, and no_cuda set to True.
+- Main configuration: conf/extractive_reader_train_cfg.yaml <br />
+It has been set using hf_BioASQ as encoder in name of encoder parameter. Set the number of gpu for n_gpu parameter if GPU can be used for training. Otherwise, n_gpu should be set to 0, and no_cuda set to True.
   
-- encoder configuration: 
-  conf/encoder/hf_BioASQ.yaml is the one used in this study, no need to change the configuration
+- encoder configuration:  <br />
+conf/encoder/hf_BioASQ.yaml is the one used in this study, no need to change the configuration.
   
-- train configuration: conf/train/extractive_reader_default.yaml 
-Set the hyperparameter for reader here: The batch_size is set to 3 due to memory limits. A larger batch size may help training accuracy, but unlike retriever training which requires contrastive loss, reader training does not construct in-batch pairs, and each example is independen, thus increasing the batch size to larger size will only help reducing gradient noise, but not introducing additional benefit on top of it. Standard size that generally works well is 16 (used by SleepQA authors) or 32. Can change accordingly if GPU memory is enough.
+- train configuration: conf/train/extractive_reader_default.yaml  <br />
+Set the hyperparameter for reader. The batch_size is set to 3 due to memory limits. A larger batch size may help improving accuracy, but unlike retriever training which requires contrastive loss, reader model trains each example independently without using in-batch pairs. As a result, increasing the batch size only helps to reduce gradient noise without providing other additional benefits. Standard size that generally works well is 16 (used by the authors of SleepQA) or 32. One can change accordingly if GPU memory is sufficient.
 
 After setting the configs, to train reader, run train_extractive_reader.py. The outputs will be saved in DPR-main/outputs/yyyy-mm-dd. 
 
 
-## Evaluation code:
+## Evaluation:
 
-To evaluate the trained models, follow two steps: 1. Convert models from Pytorch models to DPR models; 2. Test Model: Run qa_system.py (for both retriever and reader end-to-end evaluation by SleepQA authors), or reader_test.py for reader evaluation only created in this study. 
+To evaluate the trained models, follow two steps: 1. Convert models from DPR models to Pytorch models; 2. Test Model: Run qa_system.py (for both retriever and reader end-to-end evaluation), or reader_test.py for reader evaluation only.  
 
-### Model Conversion
-The DPR model checkpoints for retriever and reader are saved in DPR-main/outputs/yyyy-mm-dd. However, one needs to run convert_dpr_original_checkpoint_to_pytorch.py to convert to Pytorch models.
+### Model Conversion: 
+The DPR model checkpoints for retriever and reader are saved in DPR-main/outputs/yyyy-mm-dd. One needs to run convert_dpr_original_checkpoint_to_pytorch.py to convert to Pytorch models.
 
-To make this step easy, two scripts were created in this study: convert.sh to convert retriever checkpoints and convert_reader.sh to convert reader checkpoints to Pytorch models. 
+To make this step easy, two scripts were created in this study: convert.sh to convert retriever checkpoints and convert_reader.sh to convert reader checkpoints. 
 
-convert.sh: Once a model is trained, one need to change the --src to the proper trained model path in /DPR-main/outputs/ folder. $1 is used to choose which checkpoint to use. Note that both the question_encoder and ctx_encoder use the same input checkpoint. Then, the rest of the codes do not need to be changed. Note that `python qa_system.py` in line 23 at the end is the end-to-end retriever-reader testing code, which can be commented out if one just want to convert models, but not testing them. 
+convert_retriever.sh: Once a model is trained, one need to change the --src to the proper trained model path in /DPR-main/outputs/ folder. $1 is used to choose which checkpoint to use. Note that both the question_encoder and ctx_encoder use the same input checkpoint. Then, the rest of the codes do not need to be changed. 
 
-Similarly for convert_reader.sh, one need to change --src to the propoer DPR-main/outputs/ checkpoint name. The rest of the codes do not need to be changed. ``python reader_test.py`` is the reader test file, which can also be commented out If one just want to convert model without testing.
+convert_reader.sh: one need to change --src to the propoer DPR-main/outputs/ checkpoint name. The rest of the codes do not need to be changed. 
 
 
 ### Model Test
 
-Once the model conversion is done, the models necessary for this test step should have been placed in the proper folders, and the two scripts should be able to just call the models and run the test without problem.
-
-For reader_test.py, it takes the test questions from data/training/sleep-test.csv as input, test data data/training/oracle/sleep-test.json for ground truth labels, uses the reader model saved in models/reader/ folder after 'model conversion' step, and save predicted answers in models/processed/best_reader_predicted_spans.csv for validation. The program will print out the validation results with EM and F1 score.
+reader_test.py: it takes the test questions from data/training/sleep-test.csv as input, test data in data/training/oracle/sleep-test.json for ground truth labels, uses the reader model saved in models/reader/ folder after 'model conversion' step, and save predicted answers in models/processed/best_reader_predicted_spans.csv for validation. The program will print out the validation results with EM and F1 score.
 
 
-For qa_system.py, to use the converted models, one need to change the ctx_encoder and question_encoder to ctx_encoder='pytorch/ctx_encoder' and question_encoder to 'pytorch/question_encoder', and reader='pytorch/reader'. The other codes do not need to change. 
+qa_system.py: to use the converted models, one need to set the ctx encoder: ctx_encoder='pytorch/ctx_encoder', question encoder: 'pytorch/question_encoder', and reader: reader='pytorch/reader'. The other codes do not need to change. 
 
-qa_system.py is the entire question answering pipeline. It first, for each question, retrieve the top 1 passage from the entire corpus, and then use the reader to read on this passage and extract a single span as answer. Specifically, it takes the text_corpus and questions as input, so that the ctx_encoder and question_encoder can encode them and conduct embedding-based search for each question. The produced embedded corpus will be saved in processed/sleep-corpus_e29_aug, the retrieved passages will be saved in processed/sleep_test_e29_aut.csv. Then, the reader saved in pytorch/reader will use both the retrieved passage and the question altogether to extract span answers that are saved in 'processed/pipeline1_label_1.250.aug.csv. 
+qa_system.py is the entire question answering pipeline. It first, for each question, retrieves the top 1 passage from the entire corpus, and then use the reader to read on this passage and extract a single span as answer. Specifically, it takes the text_corpus and questions as input, so that the ctx_encoder and question_encoder can encode them and conduct embedding-based search for each question. The produced embedded corpus will be saved in processed/sleep-corpus_e29_aug, the retrieved passages will be saved in processed/sleep_test_e29_aut.csv. Then, the reader saved in pytorch/reader will use both the retrieved passage and the question altogether to extract span answers that are saved in 'processed/pipeline1_label_1.250.aug.csv. 
 
 Note that, qa_system.py will output retrieval-step Top-1 document hits (Recall@1)  for retriever evaluation, and also end-to-end EM and F1 for the entire pipeline. 
 
-### Test with a non-fine-tuned text encoder
-For ablation, this study used DPR BERT-based retriever trained on Natural Questions (NQ) dataset as baseline retreival model. Set ctx_encoder='facebook/dpr-ctx_encoder-single-nq-base' and question_encoder= ''facebook/dpr-question_encoder-single-nq-base' in qa_system.py to run these   two models.
 
 ## models: 
 
-The best fine-tuned models obtained from this reproduction study are stored in the models/ folder, namely, question_encoder/, ctx_encoder/, and reader/ 
+For reproduction study, the best fine-tuned models obtained from this reproduction study are stored in the models/ folder: models/question_encoder/, models/ctx_encoder/, models/reader/. Those models are git lfs files, which can be directly used for reader_test.py and qa_system.py evaluation scripts. No conversion is needed. 
 
-Those models are git lfs files, which can be directly used for reader_test.py and qa_system.py evaluation scripts. No conversion is needed. 
+For SleepQA3x augumentation, this study uses Google Pegasus paraphrasing model 'tuner007/pegasus_paraphrase' in data_aug/aug.py
 
-For SleepQA3x, Google Pegasus paraphrasing model 'tuner007/pegasus_paraphrase' is set in data_aug/aug.py
+### Test with a non fine-tuned text encoder
+For baseline retriever, this study used DPR BERT-based retriever trained on Natural Questions (NQ) dataset. <br />
+Set ctx_encoder='facebook/dpr-ctx_encoder-single-nq-base' and question_encoder= ''facebook/dpr-question_encoder-single-nq-base' in qa_system.py
+
 
 ## Data Analysis
 
