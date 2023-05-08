@@ -122,7 +122,7 @@ Comparison of average number of words in passage and question in train sets of o
 
 ## Reproduction and Ablation Results 
 
-### Retriver 
+### Retriever 
 
 | Results   | Model  | recall@1 | 
 | --------- |----------- | ------ |
