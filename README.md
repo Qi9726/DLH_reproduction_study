@@ -79,7 +79,7 @@ After setting the configs, to train reader, run train_extractive_reader.py. The 
 ## Model Conversion: 
 The DPR model checkpoints for retriever and reader are saved in DPR-main/outputs/yyyy-mm-dd. One needs to run convert_dpr_original_checkpoint_to_pytorch.py to convert to Pytorch models.
 
-To make this step easy, two scripts were created in this study: convert.sh to convert retriever checkpoints and convert_reader.sh to convert reader checkpoints. 
+To make this step easy, two scripts were created in this study: convert_retriever.sh to convert retriever checkpoints and convert_reader.sh to convert reader checkpoints. 
 
 convert_retriever.sh: Once a model is trained, one need to change the --src to the proper trained model path in /DPR-main/outputs/ folder. $1 is used to choose which checkpoint to use. Note that both the question_encoder and ctx_encoder use the same input checkpoint. Then, the rest of the codes do not need to be changed. 
 
