@@ -119,9 +119,9 @@ After setting the configs, to train reader, run train_extractive_reader.py. The 
 To evaluate the trained models, follow two steps: 1. Convert models from Pytorch models to DPR models; 2. Test Model: Run qa_system.py (for both retriever and reader end-to-end evaluation by SleepQA authors), or reader_test.py for reader evaluation only created in this study. 
 
 ### Model Conversion
-The model pytorch checkpoints for retriever and reader are saved in DPR-main/outputs/yyyy-mm-dd. However, one needs to run convert_dpr_original_checkpoint_to_pytorch.py to convert the models.
+The DPR model checkpoints for retriever and reader are saved in DPR-main/outputs/yyyy-mm-dd. However, one needs to run convert_dpr_original_checkpoint_to_pytorch.py to convert to Pytorch models.
 
-To make this step easy, two scripts were created in this study: convert.sh to convert retriever checkpoints and convert_reader.sh to convert reader checkpoints to DPR models. 
+To make this step easy, two scripts were created in this study: convert.sh to convert retriever checkpoints and convert_reader.sh to convert reader checkpoints to Pytorch models. 
 
 convert.sh: Once a model is trained, one need to change the --src to the proper trained model path in /DPR-main/outputs/ folder. $1 is used to choose which checkpoint to use. Note that both the question_encoder and ctx_encoder use the same input checkpoint. Then, the rest of the codes do not need to be changed. Note that `python qa_system.py` in line 23 at the end is the end-to-end retriever-reader testing code, which can be commented out if one just want to convert models, but not testing them. 
 
