@@ -64,8 +64,8 @@ The new augmented dataset SleepQA3x created in this study is via data_aug/aug.py
 To train model with this augumented dataset, simply change the DRP setting with DPR-main/conf/datasets/encoder_train_default.yaml: 
 
 sleep_train:
-  _target_: dpr.data.biencoder_data.JsonQADataset
-  file: "../../../../data/training/**sleep-train_aug2.json**"
+    _target_: dpr.data.biencoder_data.JsonQADataset
+    file: "../../../../data/training/**sleep-train_aug2.json**"
 
 
 ## Training:
